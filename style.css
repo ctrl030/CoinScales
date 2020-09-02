@@ -9,3 +9,11 @@
 #navbarContainerRow {
     background-color: #5288de;
 }
+
+.greenText {
+    color: green;
+}
+
+.redText {
+    color: red;
+}
