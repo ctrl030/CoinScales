@@ -43,23 +43,11 @@ $(document).ready(function () {
         });
 
 
-        $("#placeholder").sparkline(data[i].sparkline_in_7d.price, {
-          type: 'line',
-          width: '165px ',
-          height: '50px ',
-          lineColor: '#edc240',          
-          fillColor: undefined,
-          lineWidth: 2,
-          spotColor: undefined,
-          minSpotColor: undefined,
-          maxSpotColor: undefined,
-          highlightSpotColor: undefined,
-          highlightLineColor: undefined
-          });
+        
 
 
 
-console.log(data[i].sparkline_in_7d.price) 
+        console.log(data[i].sparkline_in_7d.price) 
 
 
 
@@ -77,11 +65,27 @@ console.log(data[i].sparkline_in_7d.price)
               <td scope="col" class="textAllignRight"> ${simpleNumberFormatter.format(Math.round(data[i].circulating_supply))} ${(data[i].symbol.toUpperCase())}</td>
                                         
               <td class="priceChangePercentage ${priceColor} textAllignRight" scope="col">${percentPriceChangeFormatted}</td>
-              <td scope="col" id="placeholder"> Graph Placeholder  </td>
+              <td scope="col" id="placeholder${i}"> Graph Placeholder  </td>
               <td scope="col">...</td>
             </tr>
           `
         );
+
+        $("#placeholder"+i).sparkline(data[i].sparkline_in_7d.price, {
+          type: 'line',
+          width: '165px',
+          height: '50px',
+          lineColor: '#edc240',
+          fillColor: '#ffffff',
+          lineWidth: 2,
+          spotColor: undefined,
+          minSpotColor: undefined,
+          maxSpotColor: undefined,
+          highlightSpotColor: undefined,
+          highlightLineColor: undefined,
+          spotRadius: 0
+          });
+
 
       };
     });
