@@ -1,6 +1,4 @@
-.metric {
-    border: 2px solid darkgoldenrod;
-}
+
 
 #firstNumbersRow {
     background-color: lightblue;
@@ -16,4 +14,17 @@
 
 .redText {
     color: red;
+}
+
+.iconSpacing {
+    height: 1em;  
+    margin-right: 5px; 
+}
+
+.textAllignRight {
+    text-align:right;
+}
+
+.limitHeightExact {
+    height: 10px;
 }
