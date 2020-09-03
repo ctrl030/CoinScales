@@ -83,7 +83,8 @@ $(document).ready(function () {
           maxSpotColor: undefined,
           highlightSpotColor: undefined,
           highlightLineColor: undefined,
-          spotRadius: 0
+          spotRadius: 0,
+          disableInteraction: true,
           });
 
 
