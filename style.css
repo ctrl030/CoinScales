@@ -1,4 +1,15 @@
+#theWrapper{
+    width: 1165px; 
+    height: 33px;
+    }
 
+table {
+    background-color:white;
+}
+
+.metric {
+    background-color:white;
+}
 
 #firstNumbersRow {
     background-color: lightblue;

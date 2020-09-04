@@ -10,7 +10,7 @@ $(document).ready(function () {
       const usdFormatter = new Intl.NumberFormat("en-US", {
         style: "currency",
         currency: "USD",
-        maximumSignificantDigits: 20,
+        maximumSignificantDigits: 20,  
       });
 
 
@@ -42,15 +42,7 @@ $(document).ready(function () {
           minimumFractionDigits: 2,
         });
 
-
         
-
-
-
-        console.log(data[i].sparkline_in_7d.price) 
-
-
-
         //To generate the market data table rows and append them to the existing html table
         $("#tableBody").append(
           `
