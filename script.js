@@ -48,7 +48,7 @@ $(document).ready(function () {
           `
             <tr>
               <td scope="col">${i + 1}</td>              
-              <td scope="col"><img class="iconSpacing my" src="${data[i].image}"></img>${data[i].name}</td>
+              <td scope="col"><img class="iconSpacing my" src="${data[i].image}"></img><b>${data[i].name}</b></td>
               <td scope="col" class="textAllignRight">${usdFormatter.format(data[i].market_cap)}</td>
                                         
               <td scope="col" class="textAllignRight">${usdFormatter.format(data[i].current_price)}</td>
