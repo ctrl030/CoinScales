@@ -31,9 +31,9 @@ $(document).ready(function () {
         //To change the color of the 24h price change in percent
         let priceColor = "blackText";
         if (percentPriceChange > 0) {
-        priceColor = "greenText";
+          priceColor = "greenText";
         } else {
-        priceColor = "redText";
+          priceColor = "redText";
         };
 
         // To get the right formatting for the 24h price change in percent
