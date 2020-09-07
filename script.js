@@ -5,7 +5,9 @@ $(document).ready(function () {
 
   let coinsDataPage1url = BASE_URL + COINS_DATA_PAGE1_ENDPOINT;
 
-  fetch(coinsDataPage1url).then(function (res) {
+  let pageToFetch = coinsDataPage1url;
+
+  fetch(pageToFetch).then(function (res) {
     res.json().then(function (data) {
       const usdFormatter = new Intl.NumberFormat("en-US", {
         style: "currency",
