@@ -4,8 +4,13 @@
     height:45px;
 }
 
+body {
+    font-size: 15px;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
 #theWrapper{
-    width: 1165px; 
+    width: 1265px; 
     
     }
 
