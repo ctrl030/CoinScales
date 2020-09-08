@@ -32,8 +32,8 @@ $(document).ready(function () {
 
   let pageToFetch =  eval((urlPartOne.concat(urlPartTwo)).concat(urlPartThree));
   
-  console.log(pageToFetch)
-  console.log(coinsDataPage1url)
+  console.log(pageToFetch);
+  console.log(coinsDataPage1url);
   
   $("#lastPageButton").hide();
   $("#nextPageButton").click(function(){
@@ -76,15 +76,10 @@ $(document).ready(function () {
         maximumSignificantDigits: 20,  
       });
 
-
-
       const simpleNumberFormatter = new Intl.NumberFormat("en-US", {
         maximumSignificantDigits: 20,
         maximumFractionDigits: 0,
       });
-
-
-     
 
       console.log(data);
 
