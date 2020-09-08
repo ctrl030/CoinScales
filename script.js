@@ -30,10 +30,10 @@ $(document).ready(function () {
   let urlPartTwo = pageCounter;
   let urlPartThree = "url";
 
-  let pageToFetch =   (urlPartOne.concat(urlPartTwo)).concat(urlPartThree);
+  let pageToFetch =  eval((urlPartOne.concat(urlPartTwo)).concat(urlPartThree));
   
   console.log(pageToFetch)
-  console.log(coinsDataPage1url)
+    console.log(coinsDataPage1url)
   
 
   $("#nextPageButton").click(function(){
