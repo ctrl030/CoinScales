@@ -33,9 +33,9 @@ $(document).ready(function () {
   let pageToFetch =  eval((urlPartOne.concat(urlPartTwo)).concat(urlPartThree));
   
   console.log(pageToFetch)
-    console.log(coinsDataPage1url)
+  console.log(coinsDataPage1url)
   
-
+  $("#lastPageButton").hide();
   $("#nextPageButton").click(function(){
       
     pageCounter += 1;
@@ -49,7 +49,7 @@ $(document).ready(function () {
       $("#nextPageButton").hide();
     }
 
-    console.log(pageCounter);
+    console.log(pageCounter + " is the pageCounter inside nextPageButton");
 
   });
 
@@ -65,8 +65,7 @@ $(document).ready(function () {
       $("#lastPageButton").hide();
     }
 
-    console.log(pageCounter);
-    
+    console.log(pageCounter + " is the pageCounter inside lastPageButton");
   });
 
   fetch(pageToFetch).then(function (res) {
