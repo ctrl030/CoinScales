@@ -60,7 +60,7 @@ $(document).ready(function () {
     if (pageCounter <10) {
       $("#nextPageButton").show();
       }
-    if (pageCounter < 1) {
+    if (pageCounter <= 1) {
       pageCounter = 1;
       $("#lastPageButton").hide();
     }
