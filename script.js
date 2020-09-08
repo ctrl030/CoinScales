@@ -1,15 +1,18 @@
 $(document).ready(function () {
   let pageCounter = 1;
+  /*
   let urlPartOne = "coinsDataPage" ;
   let urlPartTwo = pageCounter;
   let urlPartThree = "url";
-
+  */
   
   
   
   let BASE_URL = "https://api.coingecko.com/api/v3";
 
-  let COINS_DATA_PAGE1_ENDPOINT ="/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=&sparkline=false&price_change_percentage=24h&sparkline=true";
+  let COINS_DATA_PAGE_ENDPOINT ="/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=" + pageCounter + "&sparkline=false&price_change_percentage=24h&sparkline=true";
+  
+  /*
   let COINS_DATA_PAGE2_ENDPOINT ="/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=2&sparkline=false&price_change_percentage=24h&sparkline=true";
   let COINS_DATA_PAGE3_ENDPOINT ="/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=3&sparkline=false&price_change_percentage=24h&sparkline=true";
   let COINS_DATA_PAGE4_ENDPOINT ="/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=4&sparkline=false&price_change_percentage=24h&sparkline=true";
@@ -34,11 +37,15 @@ $(document).ready(function () {
   
 
   let pageToFetch =  eval((urlPartOne.concat(urlPartTwo)).concat(urlPartThree));
+  */
   
-  
+ let pageToFetch = BASE_URL + COINS_DATA_PAGE_ENDPOINT;
+
   function loadCorrectPage () {
-    urlPartTwo = pageCounter;
-    pageToFetch =  eval((urlPartOne.concat(urlPartTwo)).concat(urlPartThree));
+    // urlPartTwo = pageCounter;
+    COINS_DATA_PAGE_ENDPOINT ="/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=" + pageCounter + "&sparkline=false&price_change_percentage=24h&sparkline=true";
+    pageToFetch = BASE_URL + COINS_DATA_PAGE_ENDPOINT;
+    // pageToFetch =  eval((urlPartOne.concat(urlPartTwo)).concat(urlPartThree));
   };
 
   console.log(pageToFetch);
@@ -81,7 +88,8 @@ $(document).ready(function () {
     }
 
     console.log(pageCounter);
-    pageToFetch =  eval((urlPartOne.concat(urlPartTwo)).concat(urlPartThree));
+    pageToFetch = BASE_URL + COINS_DATA_PAGE_ENDPOINT;
+    // pageToFetch =  eval((urlPartOne.concat(urlPartTwo)).concat(urlPartThree));
     console.log("pageToFetch: " + pageToFetch);
     tableBuildingFunction();
   });
@@ -98,7 +106,8 @@ $(document).ready(function () {
     */
 
     fetch(pageToFetch).then(function (res) {
-      pageToFetch = eval((urlPartOne.concat(urlPartTwo)).concat(urlPartThree));
+      pageToFetch = BASE_URL + COINS_DATA_PAGE_ENDPOINT;
+      // pageToFetch = eval((urlPartOne.concat(urlPartTwo)).concat(urlPartThree));
       res.json().then(function (data) {
         const usdFormatter = new Intl.NumberFormat("en-US", {
           style: "currency",
@@ -140,7 +149,7 @@ $(document).ready(function () {
           $("#tableBody").append(
             `
               <tr>
-                <td scope="col">${i + 1}</td>              
+                <td scope="col">${(i + 1) + ((100*pageCounter)-100)}</td>              
                 <td scope="col"><img class="iconSpacing my" src="${data[i].image}"></img><b>${data[i].name}</b></td>
                 <td scope="col" class="textAllignRight">${usdFormatter.format(data[i].market_cap)}</td>
                                           
