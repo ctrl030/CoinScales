@@ -1,7 +1,15 @@
 $(document).ready(function () {
+  let pageCounter = 1;
+  let urlPartOne = "coinsDataPage" ;
+  let urlPartTwo = pageCounter;
+  let urlPartThree = "url";
+
+  
+  
+  
   let BASE_URL = "https://api.coingecko.com/api/v3";
 
-  let COINS_DATA_PAGE1_ENDPOINT ="/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false&price_change_percentage=24h&sparkline=true";
+  let COINS_DATA_PAGE1_ENDPOINT ="/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=&sparkline=false&price_change_percentage=24h&sparkline=true";
   let COINS_DATA_PAGE2_ENDPOINT ="/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=2&sparkline=false&price_change_percentage=24h&sparkline=true";
   let COINS_DATA_PAGE3_ENDPOINT ="/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=3&sparkline=false&price_change_percentage=24h&sparkline=true";
   let COINS_DATA_PAGE4_ENDPOINT ="/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=4&sparkline=false&price_change_percentage=24h&sparkline=true";
@@ -25,12 +33,8 @@ $(document).ready(function () {
   let coinsDataPage10url = BASE_URL + COINS_DATA_PAGE10_ENDPOINT;
   
 
-  let pageCounter = 1;
-  let urlPartOne = "coinsDataPage" ;
-  let urlPartTwo = pageCounter;
-  let urlPartThree = "url";
-
   let pageToFetch =  eval((urlPartOne.concat(urlPartTwo)).concat(urlPartThree));
+  
   
   function loadCorrectPage () {
     urlPartTwo = pageCounter;
@@ -39,11 +43,16 @@ $(document).ready(function () {
 
   console.log(pageToFetch);
   
-  
+  $("#lastPageButton").hide();
+
+  loadCorrectPage();
+
+  tableBuildingFunction();
 
   $("#nextPageButton").click(function(){
       
     pageCounter += 1;
+    $("#tableBody").empty(); 
 
     if (pageCounter >1) {
       $("#lastPageButton").show();
@@ -53,14 +62,7 @@ $(document).ready(function () {
       pageCounter = 10;
       $("#nextPageButton").hide();
     }
-    loadCorrectPage();
-    /*
-    console.log("local Pagecounter is : " + pageCounter);
-    urlPartTwo = pageCounter;
-    pageToFetch = eval((urlPartOne.concat(urlPartTwo)).concat(urlPartThree));
-    console.log("pageToFetch inside button field: " + pageToFetch); 
-    console.log("urlPartTwo inside button field: " + urlPartTwo); 
-    */
+    loadCorrectPage();    
     tableBuildingFunction();
 
   });
@@ -68,11 +70,12 @@ $(document).ready(function () {
   $("#lastPageButton").click(function(){
 
     pageCounter -= 1;
+    $("#tableBody").empty(); 
 
     if (pageCounter <10) {
       $("#nextPageButton").show();
       }
-    if (pageCounter < 1) {
+    if (pageCounter <= 1) {
       pageCounter = 1;
       $("#lastPageButton").hide();
     }
@@ -113,7 +116,7 @@ $(document).ready(function () {
 
       
 
-        //console.log(data);
+        console.log(data);
 
         for (let i = 0; i < data.length; i++) {
           const percentPriceChange = Number(data[i].price_change_percentage_24h / 100);
