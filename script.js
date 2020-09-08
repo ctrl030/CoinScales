@@ -32,8 +32,13 @@ $(document).ready(function () {
 
   let pageToFetch =  eval((urlPartOne.concat(urlPartTwo)).concat(urlPartThree));
   
-  console.log(pageToFetch)
-    console.log(coinsDataPage1url)
+  function loadCorrectPage () {
+    urlPartTwo = pageCounter;
+    pageToFetch =  eval((urlPartOne.concat(urlPartTwo)).concat(urlPartThree));
+  };
+
+  console.log(pageToFetch);
+  
   
 
   $("#nextPageButton").click(function(){
@@ -48,8 +53,15 @@ $(document).ready(function () {
       pageCounter = 10;
       $("#nextPageButton").hide();
     }
-
-    console.log(pageCounter);
+    loadCorrectPage();
+    /*
+    console.log("local Pagecounter is : " + pageCounter);
+    urlPartTwo = pageCounter;
+    pageToFetch = eval((urlPartOne.concat(urlPartTwo)).concat(urlPartThree));
+    console.log("pageToFetch inside button field: " + pageToFetch); 
+    console.log("urlPartTwo inside button field: " + urlPartTwo); 
+    */
+    tableBuildingFunction();
 
   });
 
@@ -66,88 +78,102 @@ $(document).ready(function () {
     }
 
     console.log(pageCounter);
-    
+    pageToFetch =  eval((urlPartOne.concat(urlPartTwo)).concat(urlPartThree));
+    console.log("pageToFetch: " + pageToFetch);
+    tableBuildingFunction();
   });
 
-  fetch(pageToFetch).then(function (res) {
-    res.json().then(function (data) {
-      const usdFormatter = new Intl.NumberFormat("en-US", {
-        style: "currency",
-        currency: "USD",
-        maximumSignificantDigits: 20,  
-      });
+  function tableBuildingFunction () {
+    loadCorrectPage();
+    // $("#tableBody") = [];
 
+    /*
+    console.log("global Pagecounter is : " + pageCounter);
+    pageToFetch = eval((urlPartOne.concat(urlPartTwo)).concat(urlPartThree));
+    console.log("pageToFetch at beginning of tableBuildingFunction: " + pageToFetch); 
+    console.log("urlPartTwo at beginning of tableBuildingFunction: " + urlPartTwo); 
+    */
 
-
-      const simpleNumberFormatter = new Intl.NumberFormat("en-US", {
-        maximumSignificantDigits: 20,
-        maximumFractionDigits: 0,
-      });
-
-
-     
-
-      console.log(data);
-
-      for (let i = 0; i < data.length; i++) {
-        const percentPriceChange = Number(data[i].price_change_percentage_24h / 100);
-              
-        //To change the color of the 24h price change in percent
-        let priceColor = "blackText";
-        if (percentPriceChange > 0) {
-          priceColor = "greenText";
-        } else {
-          priceColor = "redText";
-        };
-
-        // To get the right formatting for the 24h price change in percent
-        const percentPriceChangeFormatted = Number(data[i].price_change_percentage_24h / 100).toLocaleString(undefined, {
-          style: "percent",
-          minimumFractionDigits: 2,
+    fetch(pageToFetch).then(function (res) {
+      pageToFetch = eval((urlPartOne.concat(urlPartTwo)).concat(urlPartThree));
+      res.json().then(function (data) {
+        const usdFormatter = new Intl.NumberFormat("en-US", {
+          style: "currency",
+          currency: "USD",
+          maximumSignificantDigits: 20,  
         });
 
-        
-        //To generate the market data table rows and append them to the existing html table
-        $("#tableBody").append(
-          `
-            <tr>
-              <td scope="col">${i + 1}</td>              
-              <td scope="col"><img class="iconSpacing my" src="${data[i].image}"></img><b>${data[i].name}</b></td>
-              <td scope="col" class="textAllignRight">${usdFormatter.format(data[i].market_cap)}</td>
-                                        
-              <td scope="col" class="textAllignRight">${usdFormatter.format(data[i].current_price)}</td>
-              <td scope="col" class="textAllignRight">${usdFormatter.format(data[i].total_volume)}</td>
-              
-              <td scope="col" class="textAllignRight"> ${simpleNumberFormatter.format(Math.round(data[i].circulating_supply))} ${(data[i].symbol.toUpperCase())}</td>
-                                        
-              <td class="priceChangePercentage ${priceColor} textAllignRight" scope="col">${percentPriceChangeFormatted}</td>
-              <td scope="col" id="placeholder${i}"> Graph Placeholder  </td>
-              <td scope="col">...</td>
-            </tr>
-          `
-        );
 
-        $("#placeholder"+i).sparkline(data[i].sparkline_in_7d.price, {
-          type: 'line',
-          width: '165px',
-          height: '50px',
-          lineColor: '#edc240',
-          fillColor: '#ffffff',
-          lineWidth: 2,
-          spotColor: undefined,
-          minSpotColor: undefined,
-          maxSpotColor: undefined,
-          highlightSpotColor: undefined,
-          highlightLineColor: undefined,
-          spotRadius: 0,
-          disableInteraction: true,
+
+        const simpleNumberFormatter = new Intl.NumberFormat("en-US", {
+          maximumSignificantDigits: 20,
+          maximumFractionDigits: 0,
+        });
+
+
+      
+
+        //console.log(data);
+
+        for (let i = 0; i < data.length; i++) {
+          const percentPriceChange = Number(data[i].price_change_percentage_24h / 100);
+                
+          //To change the color of the 24h price change in percent
+          let priceColor = "blackText";
+          if (percentPriceChange > 0) {
+            priceColor = "greenText";
+          } else {
+            priceColor = "redText";
+          };
+
+          // To get the right formatting for the 24h price change in percent
+          const percentPriceChangeFormatted = Number(data[i].price_change_percentage_24h / 100).toLocaleString(undefined, {
+            style: "percent",
+            minimumFractionDigits: 2,
           });
 
+          
+          //To generate the market data table rows and append them to the existing html table
+          $("#tableBody").append(
+            `
+              <tr>
+                <td scope="col">${i + 1}</td>              
+                <td scope="col"><img class="iconSpacing my" src="${data[i].image}"></img><b>${data[i].name}</b></td>
+                <td scope="col" class="textAllignRight">${usdFormatter.format(data[i].market_cap)}</td>
+                                          
+                <td scope="col" class="textAllignRight">${usdFormatter.format(data[i].current_price)}</td>
+                <td scope="col" class="textAllignRight">${usdFormatter.format(data[i].total_volume)}</td>
+                
+                <td scope="col" class="textAllignRight"> ${simpleNumberFormatter.format(Math.round(data[i].circulating_supply))} ${(data[i].symbol.toUpperCase())}</td>
+                                          
+                <td class="priceChangePercentage ${priceColor} textAllignRight" scope="col">${percentPriceChangeFormatted}</td>
+                <td scope="col" id="placeholder${i}">  </td>
+                <td scope="col">...</td>
+              </tr>
+            `
+          );
 
-      };
+          $("#placeholder"+i).sparkline(data[i].sparkline_in_7d.price, {
+            type: 'line',
+            width: '165px',
+            height: '50px',
+            lineColor: '#edc240',
+            fillColor: '#ffffff',
+            lineWidth: 2,
+            spotColor: undefined,
+            minSpotColor: undefined,
+            maxSpotColor: undefined,
+            highlightSpotColor: undefined,
+            highlightLineColor: undefined,
+            spotRadius: 0,
+            disableInteraction: true,
+            });
 
+
+        };
+
+      });
+      
     });
-    
-  });
-  
+  };
 });
