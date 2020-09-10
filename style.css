@@ -12,7 +12,14 @@ body {
 #theWrapper{
     width: 1265px; 
     
-    }
+}
+
+.buttonsRowSpacing{
+    padding-right: 15px;
+    justify-content: flex-end;
+    margin-bottom: 10px;
+}
+
 
 table {
     background-color:white;
@@ -49,4 +56,8 @@ table {
 
 .limitHeightExact {
     height: 10px;
+}
+
+.lessPaddingforRow {
+    padding: 6px !important;
 }

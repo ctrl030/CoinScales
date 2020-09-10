@@ -34,6 +34,10 @@ $(document).ready(function () {
     console.log(pageCounter);
     loadCorrectPage();    
     tableBuildingFunction();
+
+    $("#nextPageButton").attr("data-toggle", "button") 
+
+
   });
 
   $("#lastPageButton").click(function(){
@@ -99,27 +103,27 @@ $(document).ready(function () {
           //To generate the market data table rows and append them to the existing html table
           $("#tableBody").append(
             `
-              <tr>
-                <td scope="col">${(i + 1) + ((100*pageCounter)-100)}</td>              
-                <td scope="col"><img class="iconSpacing my" src="${data[i].image}"></img><b>${data[i].name}</b></td>
-                <td scope="col" class="textAllignRight">${usdFormatter.format(data[i].market_cap)}</td>
+              <tr class="lessPaddingforRow">
+                <td scope="col" class="lessPaddingforRow align-middle">${(i + 1) + ((100*pageCounter)-100)}</td>              
+                <td scope="col" class="lessPaddingforRow align-middle"><img class="iconSpacing my" src="${data[i].image}"></img><b>${data[i].name}</b></td>
+                <td scope="col" class="textAllignRight lessPaddingforRow align-middle">${usdFormatter.format(data[i].market_cap)}</td>
                                           
-                <td scope="col" class="textAllignRight">${usdFormatter.format(data[i].current_price)}</td>
-                <td scope="col" class="textAllignRight">${usdFormatter.format(data[i].total_volume)}</td>
+                <td scope="col" class="textAllignRight lessPaddingforRow align-middle">${usdFormatter.format(data[i].current_price)}</td>
+                <td scope="col" class="textAllignRight lessPaddingforRow align-middle">${usdFormatter.format(data[i].total_volume)}</td>
                 
-                <td scope="col" class="textAllignRight"> ${simpleNumberFormatter.format(Math.round(data[i].circulating_supply))} ${(data[i].symbol.toUpperCase())}</td>
+                <td scope="col" class="textAllignRight lessPaddingforRow align-middle"> ${simpleNumberFormatter.format(Math.round(data[i].circulating_supply))} ${(data[i].symbol.toUpperCase())}</td>
                                           
-                <td class="priceChangePercentage ${priceColor} textAllignRight" scope="col">${percentPriceChangeFormatted}</td>
-                <td scope="col" id="placeholder${i}">  </td>
-                <td scope="col">...</td>
+                <td class="priceChangePercentage ${priceColor} textAllignRight lessPaddingforRow align-middle" scope="col">${percentPriceChangeFormatted}</td>
+                <td scope="col" id="placeholder${i}" class="lessPaddingforRow align-middle">  </td>
+                <td scope="col" class="lessPaddingforRow align-middle">...</td>
               </tr>
             `
           );
 
           $("#placeholder"+i).sparkline(data[i].sparkline_in_7d.price, {
             type: 'line',
-            width: '165px',
-            height: '50px',
+            width: '164px',
+            height: '48px',
             lineColor: '#edc240',
             fillColor: '#ffffff',
             lineWidth: 2,
