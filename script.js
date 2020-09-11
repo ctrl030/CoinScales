@@ -18,14 +18,34 @@ $(document).ready(function () {
 
   tableBuildingFunction();
 
+   
+  function takeOutClickedNextBtnBrdr()  {
+    $("#nextPageButton").css("box-shadow", "0 0 0 0", "rgba (0, 0, 0, 0)");
+  };
+ 
+  function callTakeOutClickedNextBtnBrdr()  {
+    setTimeout (takeOutClickedNextBtnBrdr, 600);          
+  };
+
+  function takeOutClickedLastBtnBrdr()  {
+    $("#lastPageButton").css("box-shadow", "0 0 0 0", "rgba (0, 0, 0, 0)");
+  };
+ 
+  function callTakeOutClickedLastBtnBrdr()  {
+    setTimeout (takeOutClickedLastBtnBrdr, 600);          
+  };
+
+
+
   $("#nextPageButton").click(function(){
-      
+    takeOutClickedLastBtnBrdr();
+    $("#nextPageButton").css("box-shadow", "0 0 0 0.2rem", "rgba (0,123,255,.5)");  
     pageCounter += 1;
     $("#tableBody").empty(); 
 
     if (pageCounter >1) {
       $("#lastPageButton").show();
-      }
+    }
     
     if (pageCounter >=10) {
       pageCounter = 10;
@@ -34,14 +54,18 @@ $(document).ready(function () {
     console.log(pageCounter);
     loadCorrectPage();    
     tableBuildingFunction();
+ 
+    callTakeOutClickedNextBtnBrdr();
 
-    $("#nextPageButton").attr("data-toggle", "button") 
-
-
+    $("#largeIntroTextField").html(`Top Crypto Currencies by Market Cap Page ${pageCounter}`);
+ 
   });
 
-  $("#lastPageButton").click(function(){
 
+
+  $("#lastPageButton").click(function(){
+    takeOutClickedNextBtnBrdr();
+    $("#lastPageButton").css("box-shadow", "0 0 0 0.2rem", "rgba (0,123,255,.5)");
     pageCounter -= 1;
     $("#tableBody").empty(); 
 
@@ -55,6 +79,14 @@ $(document).ready(function () {
     console.log(pageCounter);
     loadCorrectPage(); 
     tableBuildingFunction();
+
+    callTakeOutClickedLastBtnBrdr();
+
+    $("#largeIntroTextField").html(`Top Crypto Currencies by Market Cap Page ${pageCounter}`); 
+    if (pageCounter == 1) {
+      $("#largeIntroTextField").html(`Top 100 Crypto Currencies by Market Cap`);
+    } 
+
   });
 
   function tableBuildingFunction () {
@@ -104,7 +136,7 @@ $(document).ready(function () {
           $("#tableBody").append(
             `
               <tr class="lessPaddingforRow">
-                <td scope="col" class="lessPaddingforRow align-middle">${(i + 1) + ((100*pageCounter)-100)}</td>              
+                <td scope="col" class="lessPaddingforRow align-middle textAllignedCenter">${(i + 1) + ((100*pageCounter)-100)}</td>              
                 <td scope="col" class="lessPaddingforRow align-middle"><img class="iconSpacing my" src="${data[i].image}"></img><b>${data[i].name}</b></td>
                 <td scope="col" class="textAllignRight lessPaddingforRow align-middle">${usdFormatter.format(data[i].market_cap)}</td>
                                           

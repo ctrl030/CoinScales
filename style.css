@@ -1,7 +1,27 @@
+.row {
+   margin-left: 5px !important;
+   margin-right: 5px !important;
+   min-width: 100%;
+}
+
+.navbar{
+    margin-left: 5px !important;
+    margin-right: 5px !important;
+    min-width: 100%;
+}
 
 #navbarimg {
     width:60px;
     height:45px;
+}
+
+#largeIntroTextFieldRow {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+#largeIntroTextField {
+    margin-bottom: 0px !important;
 }
 
 body {
@@ -10,8 +30,8 @@ body {
 }
 
 #theWrapper{
-    width: 1265px; 
-    
+    width: 1265px !important; 
+    min-width: 100%;
 }
 
 .buttonsRowSpacing{
@@ -20,6 +40,9 @@ body {
     margin-bottom: 10px;
 }
 
+#lastPageButton {
+    margin-right: 10px;
+}
 
 table {
     background-color:white;
@@ -31,6 +54,8 @@ table {
 
 #firstNumbersRow {
     background-color: lightblue;
+    margin-left: 5px !important;
+    margin-right: 5px !important;
 }
 
 #navbarContainerRow {
@@ -54,8 +79,12 @@ table {
     text-align:right;
 }
 
+.textAllignedCenter{
+    text-align: center;
+}
+
 .limitHeightExact {
-    height: 10px;
+    max-height: 10px !important;
 }
 
 .lessPaddingforRow {
