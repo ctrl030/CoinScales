@@ -12,7 +12,7 @@ $(document).ready(function () {
     console.log(pageToFetch);
   };
 
-  $("#lastPageButton").hide();
+  $(".lastPageButton").hide();
 
   loadCorrectPage();
 
@@ -20,7 +20,7 @@ $(document).ready(function () {
 
    
   function takeOutClickedNextBtnBrdr()  {
-    $("#nextPageButton").css("box-shadow", "0 0 0 0", "rgba (0, 0, 0, 0)");
+    $(".nextPageButton").css("box-shadow", "0 0 0 0", "rgba (0, 0, 0, 0)");
   };
  
   function callTakeOutClickedNextBtnBrdr()  {
@@ -28,7 +28,7 @@ $(document).ready(function () {
   };
 
   function takeOutClickedLastBtnBrdr()  {
-    $("#lastPageButton").css("box-shadow", "0 0 0 0", "rgba (0, 0, 0, 0)");
+    $(".lastPageButton").css("box-shadow", "0 0 0 0", "rgba (0, 0, 0, 0)");
   };
  
   function callTakeOutClickedLastBtnBrdr()  {
@@ -37,19 +37,19 @@ $(document).ready(function () {
 
 
 
-  $("#nextPageButton").click(function(){
+  $(".nextPageButton").click(function(){
     takeOutClickedLastBtnBrdr();
-    $("#nextPageButton").css("box-shadow", "0 0 0 0.2rem", "rgba (0,123,255,.5)");  
+    $(".nextPageButton").css("box-shadow", "0 0 0 0.2rem", "rgba (0,123,255,.5)");  
     pageCounter += 1;
     $("#tableBody").empty(); 
 
     if (pageCounter >1) {
-      $("#lastPageButton").show();
+      $(".lastPageButton").show();
     }
     
     if (pageCounter >=10) {
       pageCounter = 10;
-      $("#nextPageButton").hide();
+      $(".nextPageButton").hide();
     }
     console.log(pageCounter);
     loadCorrectPage();    
@@ -63,18 +63,18 @@ $(document).ready(function () {
 
 
 
-  $("#lastPageButton").click(function(){
+  $(".lastPageButton").click(function(){
     takeOutClickedNextBtnBrdr();
-    $("#lastPageButton").css("box-shadow", "0 0 0 0.2rem", "rgba (0,123,255,.5)");
+    $(".lastPageButton").css("box-shadow", "0 0 0 0.2rem", "rgba (0,123,255,.5)");
     pageCounter -= 1;
     $("#tableBody").empty(); 
 
     if (pageCounter <10) {
-      $("#nextPageButton").show();
+      $(".nextPageButton").show();
       }
     if (pageCounter <= 1) {
       pageCounter = 1;
-      $("#lastPageButton").hide();
+      $(".lastPageButton").hide();
     }
     console.log(pageCounter);
     loadCorrectPage(); 
