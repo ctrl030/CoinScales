@@ -1,7 +1,7 @@
 .row {
    margin-left: 5px !important;
    margin-right: 5px !important;
-   min-width: 100%;
+   min-width: 100%;   
 }
 
 .navbar{
@@ -30,8 +30,7 @@ body {
 }
 
 #theWrapper{
-    width: 1265px !important; 
-    min-width: 100%;
+    width: 1265px !important;     
 }
 
 .buttonsRowSpacing{
@@ -76,10 +75,10 @@ table {
 }
 
 .textAllignRight {
-    text-align:right;
+    text-align: right;
 }
 
-.textAllignedCenter{
+.textAllignCenter{
     text-align: center;
 }
 

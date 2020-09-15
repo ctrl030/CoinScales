@@ -9,7 +9,7 @@ $(document).ready(function () {
   function loadCorrectPage () {
     COINS_DATA_PAGE_ENDPOINT ="/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=" + pageCounter + "&sparkline=false&price_change_percentage=24h&sparkline=true";
     pageToFetch = BASE_URL + COINS_DATA_PAGE_ENDPOINT;
-    console.log(pageToFetch);
+    
   };
 
   $(".lastPageButton").hide();
@@ -19,29 +19,22 @@ $(document).ready(function () {
   tableBuildingFunction();
 
    
-  function takeOutClickedNextBtnBrdr()  {
-    $(".nextPageButton").css("box-shadow", "0 0 0 0", "rgba (0, 0, 0, 0)");
+  function takeOutClickedBtnBrdr()  {
+    $("").css("box-shadow", "0 0 0 0", "rgba (0, 0, 0, 0)");
   };
  
-  function callTakeOutClickedNextBtnBrdr()  {
-    setTimeout (takeOutClickedNextBtnBrdr, 600);          
-  };
-
-  function takeOutClickedLastBtnBrdr()  {
-    $(".lastPageButton").css("box-shadow", "0 0 0 0", "rgba (0, 0, 0, 0)");
-  };
- 
-  function callTakeOutClickedLastBtnBrdr()  {
-    setTimeout (takeOutClickedLastBtnBrdr, 600);          
+  function calltakeOutClickedBtnBrdr()  {
+    setTimeout (takeOutClickedBtnBrdr, 600);          
   };
 
 
   function nextButtonFunct () {
-    takeOutClickedLastBtnBrdr();
-    $("#nextPageButton1").css("box-shadow", "0 0 0 0.2rem", "rgba (0,123,255,.5)");  
+    
+    $(this).css("box-shadow", "0 0 0 0.2rem", "rgba (0,123,255,.5)");
+    var myArray = Object.values($(this));
+    console.log("button clicked from " + myArray);  
     pageCounter += 1;
-    $("#tableBody").empty(); 
-
+     
     if (pageCounter >1) {
       $(".lastPageButton").show();
     }
@@ -50,27 +43,20 @@ $(document).ready(function () {
       pageCounter = 10;
       $(".nextPageButton").hide();
     }
-    console.log(pageCounter);
+    
     loadCorrectPage();    
     tableBuildingFunction();
  
-    callTakeOutClickedNextBtnBrdr();
+    calltakeOutClickedBtnBrdr();
 
-    $("#largeIntroTextField").html(`Top Crypto Currencies by Market Cap Page ${pageCounter}`);
-  }
+    $("#largeIntroTextField").html(`Top Cryptocurrencies by Market Cap Page ${pageCounter}`);
+  };
 
-  $("#nextPageButton1").click(function(){
-    nextButtonFunct ()
- 
-  });
+  function lastButtonFunct () {
+        
+    $(this).css("box-shadow", "0 0 0 0.2rem", "rgba (0,123,255,.5)");
 
-
-
-  $("#lastPageButton1").click(function(){
-    takeOutClickedNextBtnBrdr();
-    $("#lastPageButton1").css("box-shadow", "0 0 0 0.2rem", "rgba (0,123,255,.5)");
     pageCounter -= 1;
-    $("#tableBody").empty(); 
 
     if (pageCounter <10) {
       $(".nextPageButton").show();
@@ -79,19 +65,28 @@ $(document).ready(function () {
       pageCounter = 1;
       $(".lastPageButton").hide();
     }
-    console.log(pageCounter);
+    
     loadCorrectPage(); 
     tableBuildingFunction();
 
-    callTakeOutClickedLastBtnBrdr();
+    calltakeOutClickedBtnBrdr();
 
-    $("#largeIntroTextField").html(`Top Crypto Currencies by Market Cap Page ${pageCounter}`); 
+    $("#largeIntroTextField").html(`Top Cryptocurrencies by Market Cap Page ${pageCounter}`); 
+
     if (pageCounter == 1) {
-      $("#largeIntroTextField").html(`Top 100 Crypto Currencies by Market Cap`);
+      $("#largeIntroTextField").html(`Top 100 Cryptocurrencies by Market Cap`);
     } 
+        
+  };
 
+  $(".nextPageButton").click(function(){
+    nextButtonFunct () 
   });
 
+  $(".lastPageButton").click(function(){
+    lastButtonFunct () 
+  });
+  
   function tableBuildingFunction () {
     loadCorrectPage();
     
@@ -115,7 +110,8 @@ $(document).ready(function () {
 
       
 
-        console.log(data);
+        //console.log(data);
+        $("#tableBody").empty();
 
         for (let i = 0; i < data.length; i++) {
           const percentPriceChange = Number(data[i].price_change_percentage_24h / 100);
@@ -139,7 +135,7 @@ $(document).ready(function () {
           $("#tableBody").append(
             `
               <tr class="lessPaddingforRow">
-                <td scope="col" class="lessPaddingforRow align-middle textAllignedCenter">${(i + 1) + ((100*pageCounter)-100)}</td>              
+                <td scope="col" class="lessPaddingforRow align-middle textAllignCenter">${(i + 1) + ((100*pageCounter)-100)}</td>              
                 <td scope="col" class="lessPaddingforRow align-middle"><img class="iconSpacing my" src="${data[i].image}"></img><b>${data[i].name}</b></td>
                 <td scope="col" class="textAllignRight lessPaddingforRow align-middle">${usdFormatter.format(data[i].market_cap)}</td>
                                           
