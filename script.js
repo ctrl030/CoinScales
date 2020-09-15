@@ -36,10 +36,9 @@ $(document).ready(function () {
   };
 
 
-
-  $(".nextPageButton").click(function(){
+  function nextButtonFunct () {
     takeOutClickedLastBtnBrdr();
-    $(".nextPageButton").css("box-shadow", "0 0 0 0.2rem", "rgba (0,123,255,.5)");  
+    $("#nextPageButton1").css("box-shadow", "0 0 0 0.2rem", "rgba (0,123,255,.5)");  
     pageCounter += 1;
     $("#tableBody").empty(); 
 
@@ -58,14 +57,18 @@ $(document).ready(function () {
     callTakeOutClickedNextBtnBrdr();
 
     $("#largeIntroTextField").html(`Top Crypto Currencies by Market Cap Page ${pageCounter}`);
+  }
+
+  $("#nextPageButton1").click(function(){
+    nextButtonFunct ()
  
   });
 
 
 
-  $(".lastPageButton").click(function(){
+  $("#lastPageButton1").click(function(){
     takeOutClickedNextBtnBrdr();
-    $(".lastPageButton").css("box-shadow", "0 0 0 0.2rem", "rgba (0,123,255,.5)");
+    $("#lastPageButton1").css("box-shadow", "0 0 0 0.2rem", "rgba (0,123,255,.5)");
     pageCounter -= 1;
     $("#tableBody").empty(); 
 
