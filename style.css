@@ -43,8 +43,11 @@ body {
 }
 
 #theWrapper{
-    width: 1265px !important;     
-}
+    width: 1265px !important;
+    margin-left: 3em !important;  
+    margin-right: ;
+    margin-bottom: ;   
+}   
 
 .buttonsRowSpacing{
     padding-right: 15px;

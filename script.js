@@ -3,21 +3,63 @@ $(document).ready(function () {
   
   let BASE_URL = "https://api.coingecko.com/api/v3";
 
-  let FIRST_ROW_Cryptocurrencies_ENDPOINT = "/coins/list";
-  let FIRST_ROW_Markets_ENDPOINT = "";
-  let FIRST_ROW_MarketCap_ENDPOINT = "";
-  let FIRST_ROW_24hVol_ENDPOINT = "";
-  let FIRST_ROW_BTCDominance_ENDPOINT = "";
-  let FIRST_ROW__ENDPOINT = "";
+  let FIRST_ROW_ENDPOINT = "/global";
+  
+  const priceFormatter = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+    maximumSignificantDigits: 5, 
+    minimumSignificantDigits: 3, 
+  });
 
-  let firstRowAmountOfCryptoCurrenciesUrl = BASE_URL + FIRST_ROW_Cryptocurrencies_ENDPOINT;
-  fetch(firstRowAmountOfCryptoCurrenciesUrl).then(function (amountOfCryptosObject) { 
-    amountOfCryptosObject.json().then(function (amountOfCryptosOutput) { 
-    console.log("amountOfCryptosOutput.length: " + amountOfCryptosOutput.length);
-    $("#firstRowCryptocurrencies").html("Cryptocurrencies: " + "<a href=''>" + $(amountOfCryptosOutput).length + "</a>"); 
+  const usdFormatter = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+    maximumSignificantDigits: 20, 
+    minimumSignificantDigits: 2, 
+  });
+
+  const simpleNumberFormatter = new Intl.NumberFormat("en-US", {
+    maximumSignificantDigits: 20,
+    maximumFractionDigits: 0,
+  });
+
+
+  
+
+
+  let firstRowUrl = BASE_URL + FIRST_ROW_ENDPOINT;
+  fetch(firstRowUrl).then(function (firstRowDataObject) { 
+    firstRowDataObject.json().then(function (firstRowDataOutput) { 
+
+      // To get the right formatting for the first row 24h price change in percent
+    
+      const firstRowpercentPriceChangeFormatted = Number((firstRowDataOutput).data.market_cap_change_percentage_24h_usd / 100).toLocaleString(undefined, {
+        style: "percent",
+        minimumFractionDigits: 2,
+      });
+
+      //To change the color of the first row 24h price change in percent
+      let firstRowpriceColor = "blackText";
+      let firstRowpercentPriceChange = (firstRowDataOutput).data.market_cap_change_percentage_24h_usd;
+      if (firstRowpercentPriceChange > 0) {
+        firstRowpriceColor = "greenText";
+      } else {
+        firstRowpriceColor = "redText";
+      };
+
+                                                                    
+      $("#firstRowMarketCap").html(`Market Cap: <a href=''> ${usdFormatter.format(Math.round(firstRowDataOutput.data.total_market_cap.usd))} </a> `);
+      $("#firstRowMarkCapChngPerc24hUSD").html(` Market Cap Change 24h: <span class="${firstRowpriceColor}">${firstRowpercentPriceChangeFormatted}</span>`);
+      // $("#firstRowBTCDominance").html("BTC Dominance: " + "<a href=''>" + (firstRowDataOutput).data.active_cryptocurrencies + "</a>");
+      $("#firstRow24hVol").html(`24h Vol: <a href=''>${usdFormatter.format(Math.round(firstRowDataOutput.data.total_volume.usd))}</a>`);
+      $("#firstRowCryptocurrencies").html("Cryptocurrencies: " + "<a href=''>" + (firstRowDataOutput).data.active_cryptocurrencies + "</a>");
+      $("#firstRowMarkets").html("Markets: " + "<a href=''>" + (firstRowDataOutput).data.markets + "</a>");
+    
     });
   });
 
+  
 
 
   let COINS_DATA_PAGE_ENDPOINT ="/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=" + pageCounter + "&sparkline=false&price_change_percentage=24h&sparkline=true";
@@ -77,11 +119,6 @@ $(document).ready(function () {
     clickedButtonBeforeBrdrRmvd = $(this);
     setTimeout (function(){clickedButtonBeforeBrdrRmvd.css("box-shadow", "0 0 0 0", "rgba (0, 0, 0, 0)")}, 1200);
   
-    $("#largeIntroTextField").html(`Top Cryptocurrencies by Market Cap Page ${pageCounter}`);
-
-    if (pageCounter == 1) {
-      $("#largeIntroTextField").html(`Top 100 Cryptocurrencies by Market Cap`);
-    } 
 
   });
   
@@ -91,23 +128,18 @@ $(document).ready(function () {
     fetch(pageToFetch).then(function (res) {
       pageToFetch = BASE_URL + COINS_DATA_PAGE_ENDPOINT;      
       res.json().then(function (data) {
-        const usdFormatter = new Intl.NumberFormat("en-US", {
-          style: "currency",
-          currency: "USD",
-          maximumSignificantDigits: 20,  
-        });
 
+        
 
+        
+        $("#largeIntroTextField").html(`Top Cryptocurrencies by Market Cap Page ${pageCounter}`);
 
-        const simpleNumberFormatter = new Intl.NumberFormat("en-US", {
-          maximumSignificantDigits: 20,
-          maximumFractionDigits: 0,
-        });
-
-
+        if (pageCounter == 1) {
+          $("#largeIntroTextField").html(`Top 100 Cryptocurrencies by Market Cap`);
+        } 
       
 
-        //console.log(data);
+        console.log(data);
         $("#tableBody").empty();
 
         for (let i = 0; i < data.length; i++) {
@@ -136,12 +168,12 @@ $(document).ready(function () {
                 <td scope="col" class="lessPaddingforRow align-middle"><img class="iconSpacing my" src="${data[i].image}"></img><b>${data[i].name}</b></td>
                 <td scope="col" class="textAllignRight lessPaddingforRow align-middle">${usdFormatter.format(data[i].market_cap)}</td>
                                           
-                <td scope="col" class="textAllignRight lessPaddingforRow align-middle"><a href="">${usdFormatter.format(data[i].current_price)}</a></td>
+                <td scope="col" class="textAllignRight lessPaddingforRow align-middle"><a href="">${priceFormatter.format(data[i].current_price)}</a></td>
                 <td scope="col" class="textAllignRight lessPaddingforRow align-middle"><a href="">${usdFormatter.format(data[i].total_volume)}</a></td>
                 
                 <td scope="col" class="textAllignRight lessPaddingforRow align-middle"> ${simpleNumberFormatter.format(Math.round(data[i].circulating_supply))} ${(data[i].symbol.toUpperCase())}</td>
                                           
-                <td class="priceChangePercentage ${priceColor} textAllignRight lessPaddingforRow align-middle" scope="col">${percentPriceChangeFormatted}</td>
+                <td class="${priceColor} textAllignRight lessPaddingforRow align-middle" scope="col">${percentPriceChangeFormatted}</td>
                 <td scope="col" id="placeholder${i}" class="lessPaddingforRow align-middle">  </td>
                 <td scope="col" class="lessPaddingforRow align-middle">...</td>
               </tr>
