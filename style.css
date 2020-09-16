@@ -1,3 +1,11 @@
+#firstNumbersRow {
+    background-color: white;
+    margin-left: 5px !important;
+    margin-right: 5px !important;
+    font: bold 4px !important;
+    color: rgb(207, 214, 228);
+}
+
 .row {
    margin-left: 5px !important;
    margin-right: 5px !important;
@@ -13,6 +21,11 @@
 #navbarimg {
     width:60px;
     height:45px;
+}
+
+.navHeaderStyle {
+    font-weight: bold !important;
+    color: black;
 }
 
 #largeIntroTextFieldRow {
@@ -51,11 +64,7 @@ table {
     background-color:white;
 }
 
-#firstNumbersRow {
-    background-color: lightblue;
-    margin-left: 5px !important;
-    margin-right: 5px !important;
-}
+
 
 #navbarContainerRow {
     background-color: #5288de;
