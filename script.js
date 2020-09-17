@@ -24,13 +24,17 @@ $(document).ready(function () {
     maximumFractionDigits: 0,
   });
 
-
   
+  let wholeMarketCap = 0;
 
 
   let firstRowUrl = BASE_URL + FIRST_ROW_ENDPOINT;
   fetch(firstRowUrl).then(function (firstRowDataObject) { 
     firstRowDataObject.json().then(function (firstRowDataOutput) { 
+
+      wholeMarketCap = Math.round(firstRowDataOutput.data.total_market_cap.usd);
+      console.log( "inside first row, wholeMarketCap") 
+      console.log(wholeMarketCap) 
 
       // To get the right formatting for the first row 24h price change in percent
     
@@ -59,8 +63,8 @@ $(document).ready(function () {
     });
   });
 
-  
-
+  console.log("global, whole market cap");
+  console.log(wholeMarketCap);
 
   let COINS_DATA_PAGE_ENDPOINT ="/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=" + pageCounter + "&sparkline=false&price_change_percentage=24h&sparkline=true";
   
@@ -128,8 +132,8 @@ $(document).ready(function () {
     fetch(pageToFetch).then(function (res) {
       pageToFetch = BASE_URL + COINS_DATA_PAGE_ENDPOINT;      
       res.json().then(function (data) {
-
-        
+        console.log( "Inside table builder, BTC Market Cap" )
+        console.log(  data[0].market_cap  ) 
 
         
         $("#largeIntroTextField").html(`Top Cryptocurrencies by Market Cap Page ${pageCounter}`);
