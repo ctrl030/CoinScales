@@ -55,8 +55,8 @@ body {
     margin-bottom: 10px;
 }
 
-#lastPageButton {
-    margin-right: 10px;
+.lastPageButton {
+    margin-right: 10px !important;
 }
 
 table {
