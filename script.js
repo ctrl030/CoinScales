@@ -199,7 +199,16 @@ $(document).ready(function () {
             `
           );
 
-          $("#incomingSparkline"+i).sparkline(data[i].sparkline_in_7d.price, {
+
+          let incomingSparkArray = data[i].sparkline_in_7d.price;
+          //console.log (incomingSparkArray);
+          let outgoingSparkArray = [];
+
+          for (let counter=0; counter<incomingSparkArray.length; counter++) {
+           outgoingSparkArray.push($(incomingSparkArray)[counter]); 
+          };
+
+          $("#incomingSparkline"+i).sparkline(outgoingSparkArray, {
             type: 'line',
             width: '164px',
             height: '48px',
