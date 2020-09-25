@@ -202,11 +202,16 @@ $(document).ready(function () {
 
           let incomingSparkArray = data[i].sparkline_in_7d.price;
           //console.log (incomingSparkArray);
-          let outgoingSparkArray = [];
+          let outgoingSparkArray = [];          
 
-          for (let counter=0; counter<incomingSparkArray.length; counter++) {
-           outgoingSparkArray.push($(incomingSparkArray)[counter]); 
-          };
+          for (let counter=2; counter<(incomingSparkArray.length-2); counter++) {
+            console.log("incomingSparkArray[counter]: " + incomingSparkArray[counter]);
+            let outgoingNumber = (( (incomingSparkArray[counter-2]) + (incomingSparkArray[counter-1]) + (incomingSparkArray[counter]) + (incomingSparkArray[counter+1]) + (incomingSparkArray[counter+2]) ) / 5) ;
+            console.log("outgoingNumber " + outgoingNumber);
+            outgoingSparkArray.push(outgoingNumber);  
+          }
+          console.log(outgoingSparkArray);
+
 
           $("#incomingSparkline"+i).sparkline(outgoingSparkArray, {
             type: 'line',
