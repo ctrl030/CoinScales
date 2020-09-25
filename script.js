@@ -24,22 +24,11 @@ $(document).ready(function () {
     maximumFractionDigits: 0,
   });
 
-  
-  // let wholeMarketCap = 0;
-
-
   let firstRowUrl = BASE_URL + FIRST_ROW_ENDPOINT;
   fetch(firstRowUrl).then(function (firstRowDataObject) { 
     firstRowDataObject.json().then(function (firstRowDataOutput) { 
 
-      /*
-      wholeMarketCap = Math.round(firstRowDataOutput.data.total_market_cap.usd);
-      console.log( "inside first row, wholeMarketCap") 
-      console.log(wholeMarketCap) 
-      */
-
       // To get the right formatting for the first row 24h price change in percent
-    
       const firstRowpercentPriceChangeFormatted = Number((firstRowDataOutput).data.market_cap_change_percentage_24h_usd / 100).toLocaleString(undefined, {
         style: "percent",
         minimumFractionDigits: 2,
@@ -53,15 +42,12 @@ $(document).ready(function () {
       } else {
         firstRowpriceColor = "redText";
       };
-
                                                                     
       $("#firstRowMarketCap").html(`Market Cap: <a href=''> ${usdFormatter.format(Math.round(firstRowDataOutput.data.total_market_cap.usd))} </a> `);
       $("#firstRowMarkCapChngPerc24hUSD").html(` Market Cap Change 24h: <span class="${firstRowpriceColor}">${firstRowpercentPriceChangeFormatted}</span>`);
-      // $("#firstRowBTCDominance").html("BTC Dominance: " + "<a href=''>" + (firstRowDataOutput).data.active_cryptocurrencies + "</a>");
       $("#firstRow24hVol").html(`24h Vol: <a href=''>${usdFormatter.format(Math.round(firstRowDataOutput.data.total_volume.usd))}</a>`);
       $("#firstRowCryptocurrencies").html("Cryptocurrencies: " + "<a href=''>" + (firstRowDataOutput).data.active_cryptocurrencies + "</a>");
       $("#firstRowMarkets").html("Markets: " + "<a href=''>" + (firstRowDataOutput).data.markets + "</a>");
-    
     });
   });
 
@@ -71,8 +57,7 @@ $(document).ready(function () {
 
   function loadCorrectPage () {
     COINS_DATA_PAGE_ENDPOINT ="/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=" + pageCounter + "&sparkline=false&price_change_percentage=24h&sparkline=true";
-    pageToFetch = BASE_URL + COINS_DATA_PAGE_ENDPOINT;
-    
+    pageToFetch = BASE_URL + COINS_DATA_PAGE_ENDPOINT;    
   };
 
   $(".lastPageButton").hide();
@@ -94,9 +79,7 @@ $(document).ready(function () {
     $(this).css("box-shadow", "0 0 0 0.2rem", "rgba (0,123,255,.1)");    
 
     var myArray = Object.values($(this));
-    console.log("button clicked from " + myArray);  
-
-
+    
     if ($(this).hasClass("nextPageButton") == true) {
       pageCounter += 1;
     } else if ($(this).hasClass("lastPageButton") == true) {
@@ -121,7 +104,6 @@ $(document).ready(function () {
       $(".nextPageButton").hide();
     };
     
-    
     loadCorrectPage();    
 
     tableBuildingFunction();
@@ -129,8 +111,6 @@ $(document).ready(function () {
     let clickedButtonBeforeBrdrRmvd = 0;
     clickedButtonBeforeBrdrRmvd = $(this);
     setTimeout (function(){clickedButtonBeforeBrdrRmvd.css("box-shadow", "0 0 0 0", "rgba (0, 0, 0, 0)")}, 1200);
-  
-
   });
   
   function tableBuildingFunction () {
@@ -139,16 +119,12 @@ $(document).ready(function () {
     fetch(pageToFetch).then(function (res) {
       pageToFetch = BASE_URL + COINS_DATA_PAGE_ENDPOINT;      
       res.json().then(function (data) {
-        //console.log( "Inside table builder, BTC Market Cap" )
-        // this is wrong, data[0] is only BTC on page 1. console.log(  data[0].market_cap  ) 
-
         
         $("#largeIntroTextField").html(`Top Cryptocurrencies by Market Cap Page ${pageCounter}`);
 
         if (pageCounter == 1) {
           $("#largeIntroTextField").html(`Top 100 Cryptocurrencies by Market Cap`);
         } 
-      
 
         console.log(data);
         $("#tableBody").empty();
@@ -175,10 +151,6 @@ $(document).ready(function () {
             cryptoCurrencyUnit = cryptoCurrencyUnit.substring(0, 5) + "...";             
           }
           
-          
-
-
-          
           //To generate the market data table rows and append them to the existing html table
           $("#tableBody").append(
             `
@@ -199,19 +171,13 @@ $(document).ready(function () {
             `
           );
 
-
           let incomingSparkArray = data[i].sparkline_in_7d.price;
-          //console.log (incomingSparkArray);
           let outgoingSparkArray = [];          
 
           for (let counter=2; counter<(incomingSparkArray.length-2); counter++) {
-            console.log("incomingSparkArray[counter]: " + incomingSparkArray[counter]);
-            let outgoingNumber = (( (incomingSparkArray[counter-2]) + (incomingSparkArray[counter-1]) + (incomingSparkArray[counter]) + (incomingSparkArray[counter+1]) + (incomingSparkArray[counter+2]) ) / 5) ;
-            console.log("outgoingNumber " + outgoingNumber);
+            let outgoingNumber = (( (incomingSparkArray[counter-2]) + (incomingSparkArray[counter-1]) + (incomingSparkArray[counter]) + (incomingSparkArray[counter+1]) + (incomingSparkArray[counter+2]) ) / 5);
             outgoingSparkArray.push(outgoingNumber);  
           }
-          console.log(outgoingSparkArray);
-
 
           $("#incomingSparkline"+i).sparkline(outgoingSparkArray, {
             type: 'line',
@@ -227,8 +193,7 @@ $(document).ready(function () {
             highlightLineColor: undefined,
             spotRadius: 0,
             disableInteraction: true,
-            });
-
+          });
 
         };
 
