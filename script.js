@@ -25,16 +25,18 @@ $(document).ready(function () {
   });
 
   
-  let wholeMarketCap = 0;
+  // let wholeMarketCap = 0;
 
 
   let firstRowUrl = BASE_URL + FIRST_ROW_ENDPOINT;
   fetch(firstRowUrl).then(function (firstRowDataObject) { 
     firstRowDataObject.json().then(function (firstRowDataOutput) { 
 
+      /*
       wholeMarketCap = Math.round(firstRowDataOutput.data.total_market_cap.usd);
       console.log( "inside first row, wholeMarketCap") 
       console.log(wholeMarketCap) 
+      */
 
       // To get the right formatting for the first row 24h price change in percent
     
@@ -63,9 +65,6 @@ $(document).ready(function () {
     });
   });
 
-  console.log("global, whole market cap");
-  console.log(wholeMarketCap);
-
   let COINS_DATA_PAGE_ENDPOINT ="/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=" + pageCounter + "&sparkline=false&price_change_percentage=24h&sparkline=true";
   
   let pageToFetch = BASE_URL + COINS_DATA_PAGE_ENDPOINT;
@@ -81,6 +80,14 @@ $(document).ready(function () {
   loadCorrectPage();
 
   tableBuildingFunction();
+
+  // This creates a colored shadow around the mockup buttons to the left when clicked, and then takes it out after a set time
+  $(".cryptoCurrenciesBtn, .exchangesButton").click(function() {
+    $(this).css("box-shadow", "0 0 0 0.2rem", "rgba (0,123,255,.1)");
+    let clickedButtonBeforeBrdrRmvd = 0;
+    clickedButtonBeforeBrdrRmvd = $(this);
+    setTimeout (function(){clickedButtonBeforeBrdrRmvd.css("box-shadow", "0 0 0 0", "rgba (0, 0, 0, 0)")}, 1200);
+  });
 
   $(".nextPageButton, .lastPageButton").click(function() {
     
@@ -132,8 +139,8 @@ $(document).ready(function () {
     fetch(pageToFetch).then(function (res) {
       pageToFetch = BASE_URL + COINS_DATA_PAGE_ENDPOINT;      
       res.json().then(function (data) {
-        console.log( "Inside table builder, BTC Market Cap" )
-        console.log(  data[0].market_cap  ) 
+        //console.log( "Inside table builder, BTC Market Cap" )
+        // this is wrong, data[0] is only BTC on page 1. console.log(  data[0].market_cap  ) 
 
         
         $("#largeIntroTextField").html(`Top Cryptocurrencies by Market Cap Page ${pageCounter}`);
@@ -163,28 +170,36 @@ $(document).ready(function () {
             minimumFractionDigits: 2,
           });
 
+          let cryptoCurrencyUnit = (data[i].symbol.toUpperCase());
+          if (cryptoCurrencyUnit.length > 6) {
+            cryptoCurrencyUnit = cryptoCurrencyUnit.substring(0, 5) + "...";             
+          }
+          
+          
+
+
           
           //To generate the market data table rows and append them to the existing html table
           $("#tableBody").append(
             `
               <tr class="lessPaddingforRow">
-                <td scope="col" class="lessPaddingforRow align-middle textAllignCenter">${(i + 1) + ((100*pageCounter)-100)}</td>              
+                <td scope="col" class="textAllignCenter lessPaddingforRow align-middle ">${(i + 1) + ((100*pageCounter)-100)}</td>              
                 <td scope="col" class="lessPaddingforRow align-middle"><img class="iconSpacing my" src="${data[i].image}"></img><b>${data[i].name}</b></td>
                 <td scope="col" class="textAllignRight lessPaddingforRow align-middle">${usdFormatter.format(data[i].market_cap)}</td>
                                           
                 <td scope="col" class="textAllignRight lessPaddingforRow align-middle"><a href="">${priceFormatter.format(data[i].current_price)}</a></td>
                 <td scope="col" class="textAllignRight lessPaddingforRow align-middle"><a href="">${usdFormatter.format(data[i].total_volume)}</a></td>
                 
-                <td scope="col" class="textAllignRight lessPaddingforRow align-middle"> ${simpleNumberFormatter.format(Math.round(data[i].circulating_supply))} ${(data[i].symbol.toUpperCase())}</td>
+                <td scope="col" class="textAllignRight lessPaddingforRow align-middle"> ${simpleNumberFormatter.format(Math.round(data[i].circulating_supply))} ${cryptoCurrencyUnit} </td>
                                           
-                <td class="${priceColor} textAllignRight lessPaddingforRow align-middle" scope="col">${percentPriceChangeFormatted}</td>
-                <td scope="col" id="placeholder${i}" class="lessPaddingforRow align-middle">  </td>
+                <td class="${priceColor} textAllignCenter lessPaddingforRow align-middle" scope="col">${percentPriceChangeFormatted}</td>
+                <td scope="col" id="incomingSparkline${i}" class="lessPaddingforRow align-middle sparklineField">  </td>
                 <td scope="col" class="lessPaddingforRow align-middle">...</td>
               </tr>
             `
           );
 
-          $("#placeholder"+i).sparkline(data[i].sparkline_in_7d.price, {
+          $("#incomingSparkline"+i).sparkline(data[i].sparkline_in_7d.price, {
             type: 'line',
             width: '164px',
             height: '48px',

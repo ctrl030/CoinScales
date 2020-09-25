@@ -1,26 +1,26 @@
 #firstNumbersRow {
-    background-color: white;
-    margin-left: 5px !important;
-    margin-right: 5px !important;
-    font: bold 4px !important;
-    
+    background-color: white;   
+    font: bold 4px !important;    
 }
 
 .row {
-   margin-left: 5px !important;
-   margin-right: 5px !important;
-   min-width: 100%;   
+   margin-left: 0px !important;
+   margin-right: 0px !important;
+   width: 1265px !important;   
 }
 
-.navbar{
-    margin-left: 5px !important;
-    margin-right: 5px !important;
-    min-width: 100%;
+.nav{
+    width: 1265px !important;
 }
 
 #navbarimg {
-    width:60px;
-    height:45px;
+    width: 8f0px;
+    height: 60px;
+}
+
+#navBrandText {
+    align-self: center !important;
+    margin-left: 15px !important
 }
 
 .navHeaderStyle {
@@ -28,9 +28,13 @@
     color: black;
 }
 
+.showMenuInFront {
+    z-index: 4;
+}
+
 #largeIntroTextFieldRow {
-    margin-top: 15px;
-    margin-bottom: 15px;
+    margin-top: 32px;
+    margin-bottom: 32px;
 }
 
 #largeIntroTextField {
@@ -46,17 +50,30 @@ body {
     width: 1265px !important;
     margin-left: 100px !important;  
     margin-right: 100px !important;
-    margin-bottom: 20px !important;   
+    margin-bottom: 16px !important;   
 }   
 
-.buttonsRowSpacing{
-    padding-right: 15px;
-    justify-content: flex-end;
-    margin-bottom: 10px;
+.buttonsRowSpacing{ 
+    margin-bottom: 8px;  
+}
+
+.cryptoCurrenciesBtn {
+    margin-left: 16px !important;
+    margin-right: 8px !important;
 }
 
 .lastPageButton {
-    margin-right: 10px !important;
+    margin-right: 8px !important;
+}
+
+.nextPageButton {
+    margin-right: 16px !important;
+}
+
+.stickyFirstRow {
+    position: sticky;
+    top: 0;
+    z-index: 3 !important;
 }
 
 table {
@@ -66,8 +83,6 @@ table {
 .metric {
     background-color:white;
 }
-
-
 
 #navbarContainerRow {
     background-color: #5288de;
@@ -100,4 +115,8 @@ table {
 
 .lessPaddingforRow {
     padding: 6px !important;
+}
+
+.sparklineField {
+    width: 164px;
 }
