@@ -2,6 +2,7 @@
 
 <html lang="en">
 
+<<<<<<< Updated upstream
     <head>
         <meta charset="UTF-8">
         <title>Coin Scales MarketCap</title>        
@@ -17,4 +18,245 @@
 
     </body>
 
+=======
+  <head>
+    <meta charset="UTF-8">
+    <title>Coin Scales MarketCap</title>
+
+    // Using Bootstrap   
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    
+    // Own css stylesheet     
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+    // Jquery
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    // Open source jquery plugin for the sparkline
+    <script src="https://omnipotent.net/jquery.sparkline/2.1.2/jquery.sparkline.min.js" type="text/javascript"></script>
+
+    // Own JavaScript file
+    <script src="script.js" ></script>
+
+    // Favimages and icons to be used by browsers, devices, etc.
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+    <link rel="manifest" href="/icons/site.webmanifest">
+    <link rel="mask-icon" href="/icons/safari-pinned-tab.svg" color="#00000">
+    <link rel="shortcut icon" href="/icons/favicon.ico">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-config" content="/icons/browserconfig.xml">
+    <meta name="theme-color" content="#000000">
+  </head>
+
+
+  <body>
+
+    // Setting the whole body content to be centered horizontally
+    <div class="d-flex justify-content-center">
+      
+      // Inside the body, setting a fixed width for all the content and fixed margins around it
+      <div id="theWrapper">
+
+        // The first row on top the page, displaying global market data
+        <div class="row" id="firstNumbersRow">
+
+          <div class="col">
+            <span class="firstRowText" id="firstRowMarketCap">Market Cap: </span>
+          </div>
+
+          <div class="col">
+            <span class="firstRowText" id="firstRowMarkCapChngPerc24hUSD">Market Cap Change 24h: </span>
+          </div>
+
+          <div class="col">
+            <span class="firstRowText" id="firstRow24hVol">24h Vol: </span>
+          </div>
+                    
+          <div class="col">
+            <span class="firstRowText" id="firstRowCryptocurrencies">Cryptocurrencies: </span>
+          </div>
+
+          <div class="col">
+            <span class="firstRowText" id="firstRowMarkets">Markets: </span>
+          </div>
+
+        </div>
+
+        // Navbar, including logo, navigation menu headers, a drop down menu for the links section and a search field
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+          <a class="navbar-brand d-flex" href="#" >
+            <img src="https://cdn.pixabay.com/photo/2017/09/13/22/47/justice-2747368_960_720.png" alt="classic scale icon" class="d-inline-block align-top" id="navbarimg" >
+            <span id="navBrandText">CoinScales</span> 
+          </a>          
+          
+          <div>
+            
+            <ul class="navbar-nav mr-auto">
+
+              <li class="nav-item navHeaderStyle">
+                <a class="nav-link" href="#">Cryptocurrencies</a>
+              </li>
+
+              <li class="nav-item navHeaderStyle">
+                <a class="nav-link" href="#">Exchanges</a>
+              </li>
+
+              <li class="nav-item navHeaderStyle">
+                <a class="nav-link" href="#">Headlines</a>
+              </li>
+
+              <li class="nav-item navHeaderStyle">
+                <a class="nav-link" href="#">Products</a>
+              </li>
+
+              <li class="nav-item navHeaderStyle">
+                <a class="nav-link" href="#">Tools</a>
+              </li>
+
+              <li class="nav-item navHeaderStyle">
+                <a class="nav-link" href="#">Learn</a>
+              </li>
+
+              <li class="nav-item navHeaderStyle">
+                <a class="nav-link" href="#">DeFi</a>
+              </li>
+              
+              <li class="nav-item navHeaderStyle dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                 Links 
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item showMenuInFront" href="https://defipulse.com/" target="_blank" rel="noopener noreferrer">DeFi Pulse</a>
+                  <a class="dropdown-item showMenuInFront" href="https://uniswap.org/" target="_blank" rel="noopener noreferrer">Uniswap</a>
+                  <a class="dropdown-item showMenuInFront" href="https://messari.io/" target="_blank" rel="noopener noreferrer">Messari</a>
+                  <a class="dropdown-item showMenuInFront" href="https://www.coingecko.com/en/api" target="_blank" rel="noopener noreferrer">Coingecko API</a> 
+                  <a class="dropdown-item showMenuInFront" href="https://etherscan.io/blocks" target="_blank" rel="noopener noreferrer">Gas via Etherscan Blocks</a>
+                  <a class="dropdown-item showMenuInFront" href="https://academy.ivanontech.com" target="_blank" rel="noopener noreferrer">Ivan On Tech Academy</a>                                            
+                </div>            
+              </li>
+
+            </ul>
+
+            <form class="form-inline my-2 my-lg-0">
+              <input class="form-control mr-sm-2" type="search" placeholder="Search CryptoScales" aria-label="Search">
+              <button class="btn btn-primary my-2 my-sm-0" type="submit">Search</button>
+            </form>
+
+          </div>
+        </nav>
+        
+        // Large text field used for navigation
+        <div class="row d-flex justify-content-center align-items-center" id="largeIntroTextFieldRow">
+          <div id="largeIntroTextFieldCol">
+            <h2 id="largeIntroTextField"><b>Top 100 Cryptocurrencies by Market Cap</b></h2>
+          </div>
+        </div>
+        
+          
+        // Navigation buttons above the cryptocurrency table, wrapped in a row to define spacing    
+        <div class="d-flex row buttonsRowSpacing">
+          <!--Careful with the span element, don't put in empty space, will be displayed!-->
+          <span class="mr-auto"><!--
+          --><button type="button" class="btn btn-outline-primary cryptoCurrenciesBtn" id="cryptoCurrenciesBtn1">
+          Cryptocurrencies
+          </button><!--
+          --><button type="button" class= "btn btn-outline-primary exchangesButton" id="exchangesButton1">
+          Exchanges
+          </button>
+          </span>
+
+          <button type="button" class="btn btn-outline-primary lastPageButton" id="lastPageButton1">
+            &#8678; Previous 100
+          </button>
+          <button type="button" class= "btn btn-outline-primary nextPageButton" id="nextPageButton1" >
+            Next 100 &#8680;
+          </button>
+        </div>
+
+        // The table of cryptocurrency data, including table head and body
+        <table class="table">
+                  
+          <thead class="thead stickyFirstRow">                      
+            <tr>
+
+              <th scope="col" class="metric stickyFirstRow" id="rankMetric">
+                Rank  
+              </th>
+
+              <th scope="col" class="metric stickyFirstRow" id="nameMetric">
+                  Name  
+              </th>
+
+              <th scope="col" class="metric textAllignRight stickyFirstRow" id="marketCapMetric">
+                  Market Cap  
+              </th>
+
+              <th scope="col" class="metric textAllignRight stickyFirstRow" id="priceMetric">
+                  Price  
+              </th>
+
+              <th scope="col" class="metric textAllignRight stickyFirstRow" id="volumeMetric">
+                  Volume (24h)  
+              </th>
+
+              <th scope="col" class="metric textAllignRight stickyFirstRow" id="circulatingSupplyMetric">
+                  Circ. Supply  
+              </th>
+
+              <th scope="col" class="metric textAllignRight stickyFirstRow"  id="changeLast24hMetric">
+                  Change (24h)
+              </th>
+
+              <th scope="col" class="metric textAllignCenter stickyFirstRow" id="priceGraphMetric">
+                  Price Graph (7d) 
+              </th>
+
+              <th scope="col" class="metric " id="moreCoinOptionsMetric">                      
+              </th>
+
+            </tr>      
+          </thead>
+          
+          // Table body will be querried, generated and filled in via JavaScript and Coingecko API
+          <tbody id="tableBody">      
+          </tbody>                          
+
+        </table>
+
+
+        // Navigation buttons under the cryptocurrency table, using the same structure and CSS definitions as above, but different ids for JS
+        <div class="d-flex row buttonsRowSpacing">
+
+          <!--Careful with the span element, don't put in empty space, will be displayed!-->
+          <span class="mr-auto"><!--
+          --><button type="button" class="btn btn-outline-primary cryptoCurrenciesBtn" id="cryptoCurrenciesBtn2">
+          Cryptocurrencies
+          </button><!--
+          --><button type="button" class= "btn btn-outline-primary exchangesButton" id="exchangesButton2">
+          Exchanges
+          </button>
+          </span>
+
+          <button type="button" class="btn btn-outline-primary lastPageButton" id="lastPageButton2">
+            &#8678; Previous 100
+          </button>
+          <button type="button" class= "btn btn-outline-primary nextPageButton" id="nextPageButton2">
+            Next 100 &#8680;
+          </button>
+
+        </div>   
+
+      </div>     
+      
+    </div>
+  
+    // Connecting JS libraries for bootstrap
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+  </body>
+>>>>>>> Stashed changes
 </html>
