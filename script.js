@@ -21,8 +21,6 @@ $(document).ready(function () {
     minimumSignificantDigits: 3, 
   });
 
-
-
   // Fetching the data for the first row and inserting it into the HTML structure
   fetch(firstRowUrl).then(function (firstRowDataObject) { 
     firstRowDataObject.json().then(function (firstRowDataOutput) { 
