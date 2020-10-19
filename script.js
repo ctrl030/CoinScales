@@ -1,7 +1,3 @@
-<<<<<<< Updated upstream
-$(document).ready(function(){
-
-=======
 // Executing code when document has finished loading everything necessary
 $(document).ready(function () {
 
@@ -24,21 +20,14 @@ $(document).ready(function () {
     maximumSignificantDigits: 5, 
     minimumSignificantDigits: 3, 
   });
->>>>>>> Stashed changes
 
 
 
-<<<<<<< Updated upstream
-=======
   // Fetching the data for the first row and inserting it into the HTML structure
   fetch(firstRowUrl).then(function (firstRowDataObject) { 
     firstRowDataObject.json().then(function (firstRowDataOutput) { 
->>>>>>> Stashed changes
 
 
-<<<<<<< Updated upstream
-});
-=======
       //To change the color of the first row 24h price change in percent
       let firstRowpriceColor = "blackText";
       let firstRowpercentPriceChange = (firstRowDataOutput).data.market_cap_change_percentage_24h_usd;
@@ -233,4 +222,3 @@ $(document).ready(function () {
     });
   };
 });
->>>>>>> Stashed changes
