@@ -36,8 +36,11 @@ $(document).ready(function () {
   fetch(firstRowUrl).then(function (firstRowDataObject) { 
     firstRowDataObject.json().then(function (firstRowDataOutput) { 
 
-
-      
+      // To get the right formatting for the first row 24h price change in percent
+      const firstRowpercentPriceChangeFormatted = Number((firstRowDataOutput).data.market_cap_change_percentage_24h_usd / 100).toLocaleString(undefined, {
+        style: "percent",
+        minimumFractionDigits: 2,
+      });      
 
       //To change the color of the first row 24h price change in percent
       let firstRowpriceColor = "blackText";
