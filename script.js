@@ -36,6 +36,9 @@ $(document).ready(function () {
   fetch(firstRowUrl).then(function (firstRowDataObject) { 
     firstRowDataObject.json().then(function (firstRowDataOutput) { 
 
+
+      
+
       //To change the color of the first row 24h price change in percent
       let firstRowpriceColor = "blackText";
       let firstRowpercentPriceChange = (firstRowDataOutput).data.market_cap_change_percentage_24h_usd;
