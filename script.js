@@ -1,4 +1,3 @@
-// Executing code when document has finished loading everything necessary
 $(document).ready(function () {
 
   // Navigation variable
@@ -138,7 +137,7 @@ $(document).ready(function () {
         } 
 
         // Console.log for queryied, incoming crypto currency data, useful for further development 
-        // console.log(data);
+        console.log(data);
 
         // Emptying the table body first
         $("#tableBody").empty();
