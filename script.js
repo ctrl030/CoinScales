@@ -9,9 +9,6 @@ $(document).ready(function () {
   // Endpoint for first row with global market data
   let FIRST_ROW_ENDPOINT = "/global";  
   
-  // Setting url to be querried at API endpoint for the first row's data
-  let firstRowUrl = BASE_URL + FIRST_ROW_ENDPOINT;
-
   // Various formatters to convert and display the table data
   const priceFormatter = new Intl.NumberFormat("en-US", {
     style: "currency",
@@ -19,6 +16,21 @@ $(document).ready(function () {
     maximumSignificantDigits: 5, 
     minimumSignificantDigits: 3, 
   });
+
+  const usdFormatter = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+    maximumSignificantDigits: 20,
+    minimumSignificantDigits: 2,
+  });
+
+  const simpleNumberFormatter = new Intl.NumberFormat("en-US", {
+    maximumSignificantDigits: 20,
+    maximumFractionDigits: 0,
+  });
+
+  // Setting url to be querried at API endpoint for the first row's data
+  let firstRowUrl = BASE_URL + FIRST_ROW_ENDPOINT;
 
   // Fetching the data for the first row and inserting it into the HTML structure
   fetch(firstRowUrl).then(function (firstRowDataObject) { 
