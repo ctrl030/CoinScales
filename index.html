@@ -4,7 +4,7 @@
 
   <head>
     <meta charset="UTF-8">
-    <title>Coin Scales MarketCap</title>
+    <title>CoinScales MarketCap</title>
 
     <!-- Using Bootstrap -->   
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
@@ -75,7 +75,7 @@
             <span id="navBrandText">CoinScales</span> 
           </a>          
           
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <div class="navbar" id="navbarSupportedContent">
             
             <ul class="navbar-nav mr-auto">
 
@@ -210,26 +210,17 @@
         </table>
 
 
-        <!-- Navigation buttons under the cryptocurrency table, using the same structure and CSS definitions as above, but different ids for JS -->
+        <!-- Navigation buttons under the cryptocurrency table -->
         <div class="d-flex row buttonsRowSpacing">
-
-          <!--Careful with the span element, don't put in empty space, will be displayed! -->
-          <span class="mr-auto"><!--
-          --><button type="button" class="btn btn-outline-primary cryptoCurrenciesBtn" id="cryptoCurrenciesBtn2">
-          Cryptocurrencies
-          </button><!--
-          --><button type="button" class= "btn btn-outline-primary exchangesButton" id="exchangesButton2">
-          Exchanges
-          </button>
-          </span>
-
-          <button type="button" class="btn btn-outline-primary lastPageButton" id="lastPageButton2">
+          <!--Careful with the span element, don't put in empty space, will be displayed! -->          
+          <span class="ml-auto"><!--
+          --><button type="button" class="btn btn-outline-primary lastPageButton" id="lastPageButton2">
             &#8678; Previous 100
-          </button>
-          <button type="button" class= "btn btn-outline-primary nextPageButton" id="nextPageButton2">
+          </button><!--
+          --><button type="button" class= "btn btn-outline-primary nextPageButton" id="nextPageButton2">
             Next 100 &#8680;
           </button>
-
+        </span>
         </div>   
 
       </div>     
