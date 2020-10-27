@@ -28,6 +28,13 @@
     color: black;
 }
 
+#navbarSupportedContent {
+    padding-right: 0 !important; 
+}
+#navSearchFieldArea {
+    margin-left: 81px !important;
+}
+
 .showMenuInFront {
     z-index: 4;
 }
